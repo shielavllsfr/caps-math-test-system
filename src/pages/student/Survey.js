@@ -103,6 +103,7 @@ export default function Survey() {
           })
         }
         initSurvey();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const fetchSurveyInfo = () => {

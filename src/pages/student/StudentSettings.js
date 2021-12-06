@@ -211,6 +211,7 @@ export default function StudentSettings() {
         })
       }
       fetchUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleAddAndCont = (e) => {
