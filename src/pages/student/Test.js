@@ -73,11 +73,13 @@ export default function Test() {
         .doc("response-status")
         .get()
         .then((responseData) => {
-          if (responseData.data() === undefined) {
+          if (
+            responseData.data() === undefined ||
+            !responseData.data().responded
+          ) {
             fetchTestInfo();
-          } else if (!responseData.data().responded) {
+          } else if (responseData.data().responded) {
             setResponded(responseData.data().responded);
-            fetchTestInfo();
           }
         });
     };
