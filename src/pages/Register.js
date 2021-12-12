@@ -338,7 +338,7 @@ export default function Register() {
           >
             <Typography variant="h5">Student ID</Typography>
             <Typography variant="h5" sx={{ marginLeft: "20vh" }}>
-              Course
+              Department
             </Typography>
             <Typography variant="h5" sx={{ marginLeft: "12vh" }}>
               Year
