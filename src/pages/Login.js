@@ -276,10 +276,6 @@ export default function Login() {
                 label="Remember me"
               />
             </FormGroup>
-
-            <Link to="/forgotpassword" style={{ marginLeft: "34vh" }}>
-              Forgot Password?
-            </Link>
           </Grid>
           <Grid className={classes.center} style={{ marginTop: "10vh" }}>
             <Button
