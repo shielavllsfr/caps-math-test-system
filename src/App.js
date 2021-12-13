@@ -1,5 +1,5 @@
-import './App.css';
-import { useEffect, useState } from 'react';
+import "./App.css";
+import { useEffect, useState } from "react";
 import firebase from "./utils/firebase";
 import {
   BrowserRouter as Router,
@@ -7,9 +7,9 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import PrivateRoute from './router/PrivateRoute';
-import PublicRoute from './router/PublicRoute';
-import AdminRoute from './router/AdminRoute';
+import PrivateRoute from "./router/PrivateRoute";
+import PublicRoute from "./router/PublicRoute";
+import AdminRoute from "./router/AdminRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -17,139 +17,156 @@ import Register from "./pages/Register";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminTest from "./pages/admin/AdminTest";
-import AdminSettings from './pages/admin/AdminSettings';
-import AdminRecords from './pages/admin/AdminRecords';
-import AdminRecordData from './pages/admin/AdminRecordData';
+import AdminSettings from "./pages/admin/AdminSettings";
+import AdminRecords from "./pages/admin/AdminRecords";
+import AdminRecordData from "./pages/admin/AdminRecordData";
 
-import StudentHome from './pages/student/StudentHome';
-import Survey from './pages/student/Survey';
-import Test from './pages/student/Test';
-import TestResult from './pages/student/TestResult';
-import ReviewTest from './pages/student/ReviewTest';
-import StudentSettings from './pages/student/StudentSettings';
-
+import StudentHome from "./pages/student/StudentHome";
+import Survey from "./pages/student/Survey";
+import Test from "./pages/student/Test";
+import TestResult from "./pages/student/TestResult";
+import ReviewTest from "./pages/student/ReviewTest";
+import StudentSettings from "./pages/student/StudentSettings";
 
 function App() {
   const [values, setValues] = useState({
     isAuth: false,
     isAdmin: false,
     isLoading: true,
-    user: null
+    user: null,
   });
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (signInUser) {
-      if(signInUser){
+      if (signInUser) {
         let admin = false;
-        if (signInUser.uid === 'I5IQEY0nQOT3OL9o8M7dzyBjDTJ2') admin = true;
-        setValues({ isAuth: true, user: signInUser, isLoading: false, isAdmin: admin});
-      } 
-      else{
-        setValues({isAuth: false, user: signInUser, isLoading: false, isAdmin: false});
-      } 
-        console.log(signInUser)
+        if (signInUser.uid === "8XjaEXBOuATikvqtg2nJEy1UWWt1") admin = true;
+        setValues({
+          isAuth: true,
+          user: signInUser,
+          isLoading: false,
+          isAdmin: admin,
+        });
+      } else {
+        setValues({
+          isAuth: false,
+          user: signInUser,
+          isLoading: false,
+          isAdmin: false,
+        });
+      }
+      console.log(signInUser);
     });
-  }, [])
+  }, []);
 
   return (
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
 
-          <PublicRoute
-          component={Home}
-          path="/home"
-          exact/>
+        <PublicRoute component={Home} path="/home" exact />
 
-          <PublicRoute
+        <PublicRoute
           component={Login}
           path="/login"
           restricted={false}
           isAuth={values.isAuth}
-          exact/>
+          exact
+        />
 
-          <PublicRoute
+        <PublicRoute
           component={Register}
           path="/register"
           restricted={false}
           isAuth={values.isAuth}
-          exact/>
-          
-          <AdminRoute
+          exact
+        />
+
+        <AdminRoute
           component={AdminDashboard}
           isAuth={values.isAuth}
           isAdmin={values.isAdmin}
           user={values.user}
-          path="/admin-dashboard"/>
+          path="/admin-dashboard"
+        />
 
-          <AdminRoute
+        <AdminRoute
           component={AdminTest}
           isAuth={values.isAuth}
           isAdmin={values.isAdmin}
           user={values.user}
-          path="/admin-test"/>
+          path="/admin-test"
+        />
 
-          <AdminRoute
+        <AdminRoute
           component={AdminRecords}
           isAuth={values.isAuth}
           isAdmin={values.isAdmin}
           user={values.user}
-          path="/admin-records"/>
+          path="/admin-records"
+        />
 
-          <AdminRoute
+        <AdminRoute
           component={AdminRecordData}
           isAuth={values.isAuth}
           isAdmin={values.isAdmin}
           user={values.user}
-          path="/admin-survey-record"/>
+          path="/admin-survey-record"
+        />
 
-          <AdminRoute
+        <AdminRoute
           component={AdminSettings}
           isAuth={values.isAuth}
           isAdmin={values.isAdmin}
           user={values.user}
-          path="/admin-settings"/>
-          
-          <PrivateRoute
+          path="/admin-settings"
+        />
+
+        <PrivateRoute
           component={StudentHome}
           isAuth={values.isAuth}
           user={values.user}
-          path="/std-home"/>
+          path="/std-home"
+        />
 
-          <PrivateRoute
+        <PrivateRoute
           component={Survey}
           isAuth={values.isAuth}
           user={values.user}
-          path="/test-survey"/>
+          path="/test-survey"
+        />
 
-          <PrivateRoute
+        <PrivateRoute
           component={Test}
           isAuth={values.isAuth}
           user={values.user}
-          path="/test-test"/>
+          path="/test-test"
+        />
 
-          <PrivateRoute
+        <PrivateRoute
           component={TestResult}
           isAuth={values.isAuth}
           user={values.user}
-          path="/test-result"/>
+          path="/test-result"
+        />
 
-          <PrivateRoute
+        <PrivateRoute
           component={ReviewTest}
           isAuth={values.isAuth}
           user={values.user}
-          path="/review-test"/>
+          path="/review-test"
+        />
 
-          <PrivateRoute
+        <PrivateRoute
           component={StudentSettings}
           isAuth={values.isAuth}
           user={values.user}
-          path="/std-settings"/>
-          
-        </Switch>
-      </Router>
+          path="/std-settings"
+        />
+      </Switch>
+    </Router>
   );
 }
 
