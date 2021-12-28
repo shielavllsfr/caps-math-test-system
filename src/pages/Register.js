@@ -421,7 +421,7 @@ export default function Register() {
           <FormGroup className={classes.leftSide}>
             <FormControlLabel
               control={<Checkbox onClick={handleTerms} />}
-              label="I agree that all information above is true and accurate."
+              label="I hereby certify that the above information is true and correct."
             />
           </FormGroup>
           <Button
