@@ -40,7 +40,7 @@ function App() {
     firebase.auth().onAuthStateChanged(function (signInUser) {
       if (signInUser) {
         let admin = false;
-        if (signInUser.uid === "8XjaEXBOuATikvqtg2nJEy1UWWt1") admin = true;
+        if (signInUser.uid === "Kky5YznWr2UiE6FncgFtxbA9eXq2") admin = true;
         setValues({
           isAuth: true,
           user: signInUser,
