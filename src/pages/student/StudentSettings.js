@@ -232,6 +232,8 @@ export default function StudentSettings() {
             ...data,
             address: userInfoValues.address,
             contact: userInfoValues.contact,
+            course: userInfoValues.course,
+            year: userInfoValues.year,
           };
 
           if (userInfoValues.avatarChanged) {
@@ -596,7 +598,7 @@ export default function StudentSettings() {
 
                 <Grid className={classes.leftSide} sx={{ display: "flex" }}>
                   <Typography style={{ marginRight: "6.5vh" }}>
-                    <b>Department:</b>
+                    <b>Course:</b>
                   </Typography>
                   <Typography>
                     <b>Year:</b>
