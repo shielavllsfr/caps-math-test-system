@@ -37,22 +37,19 @@ const useStyle = makeStyles({
     backgroundColor: "#ff5959 !important",
     color: "#ab0000 !important",
   },
+
+  wrongMessage: {
+    color: "#ff5959 !important",
+  },
 });
 
 export default function Test() {
   const classes = useStyle();
 
-  // const [snackMessage, setSnackMessage] = useState({
-  //     type: '',
-  //     message: ''
-  // })
-
   const [questions, setQuestion] = useState({
     questions: [],
     answers: [],
   });
-
-  // const [responded, setResponded] = useState(false)
 
   const [loading, setLoading] = useState(true);
 
@@ -63,6 +60,8 @@ export default function Test() {
       let newQuestionData = [];
       let count = 1;
       let choicesBg = [];
+      let questionWrong = [];
+      let questionStatement = [];
 
       firebase
         .firestore()
@@ -119,11 +118,16 @@ export default function Test() {
                             a: classes.correct,
                             aChecked: true,
                           };
+                          questionWrong[i] = false;
+                          questionStatement[i] = "";
                         } else {
                           choicesBg[i] = {
                             ...choicesBg[i],
                             a: classes.wrong,
                           };
+                          questionWrong[i] = true;
+                          questionStatement[i] =
+                            questionData.data().questionStatement[i];
                           getCorrectAnswer(
                             questionData.data().correctAnswer[i],
                             i,
@@ -141,11 +145,16 @@ export default function Test() {
                             b: classes.correct,
                             bChecked: true,
                           };
+                          questionWrong[i] = false;
+                          questionStatement[i] = "";
                         } else {
                           choicesBg[i] = {
                             ...choicesBg[i],
                             b: classes.wrong,
                           };
+                          questionWrong[i] = true;
+                          questionStatement[i] =
+                            questionData.data().questionStatement[i];
                           getCorrectAnswer(
                             questionData.data().correctAnswer[i],
                             i,
@@ -163,11 +172,16 @@ export default function Test() {
                             c: classes.correct,
                             cChecked: true,
                           };
+                          questionWrong[i] = false;
+                          questionStatement[i] = "";
                         } else {
                           choicesBg[i] = {
                             ...choicesBg[i],
                             c: classes.wrong,
                           };
+                          questionWrong[i] = true;
+                          questionStatement[i] =
+                            questionData.data().questionStatement[i];
                           getCorrectAnswer(
                             questionData.data().correctAnswer[i],
                             i,
@@ -185,11 +199,16 @@ export default function Test() {
                             d: classes.correct,
                             dChecked: true,
                           };
+                          questionWrong[i] = false;
+                          questionStatement[i] = "";
                         } else {
                           choicesBg[i] = {
                             ...choicesBg[i],
                             d: classes.wrong,
                           };
+                          questionWrong[i] = true;
+                          questionStatement[i] =
+                            questionData.data().questionStatement[i];
                           getCorrectAnswer(
                             questionData.data().correctAnswer[i],
                             i,
@@ -217,6 +236,8 @@ export default function Test() {
                         bChecked: choicesBg[index].bChecked,
                         cChecked: choicesBg[index].cChecked,
                         dChecked: choicesBg[index].dChecked,
+                        questionWrong: questionWrong[index],
+                        questionStatement: questionStatement[index],
                       };
                       answers.push(" ");
                       count++;
@@ -321,6 +342,12 @@ export default function Test() {
               <Typography variant="h6">
                 {data.questionCount}. {data.question}
               </Typography>
+
+              {data.questionWrong ? (
+                <Typography className={classes.wrongMessage}>
+                  {data.questionStatement}
+                </Typography>
+              ) : null}
 
               <FormControl component="fieldset">
                 <RadioGroup
